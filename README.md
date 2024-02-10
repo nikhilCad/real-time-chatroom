@@ -46,4 +46,4 @@ TailwindCSS -> Use classname in UIs to apply pre-defined styles
 Typescript is used
 
 Main file -> Page.tsx
-14:10
+38:00
