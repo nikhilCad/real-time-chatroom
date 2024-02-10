@@ -38,6 +38,8 @@ To hide a page from this, name it "(folderName)" instead of "folderName" in app 
 
 layout.tsx can also be overridden if in same folder as "()" for its sibling pages
 
+main default page.tsx is inside (main) folder, but since its just organizational it is picked up as default path by next js
+
 Here the 2nd class took priority
 
 TailwindCSS -> Use classname in UIs to apply pre-defined styles

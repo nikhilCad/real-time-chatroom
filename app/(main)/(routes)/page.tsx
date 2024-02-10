@@ -10,7 +10,7 @@ export default function Home() {
     Hi
     </p>
     <Button className={cn("bg-indigo-500", true&&"bg-red-500")}>
-      This is ShadcnUI button
+      This is ShadcnUI button ok
     </Button>
     </div>
   );
