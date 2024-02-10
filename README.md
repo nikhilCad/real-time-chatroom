@@ -6,11 +6,12 @@ to run -> npm run dev
 localhost at port 3000
 
 Next.JS -> Framework used with React
-Shadcn UI -> Component library
 
+Shadcn UI -> Component library, can install only the components we need not entire library
+Our Shadcn components/ui are present in the components directory, so if we want we can edit them unlike other component libraries
+
+TailwindCSS -> Use classname in UIs to apply pre-defined styles
 Typescript is used
-0:00
 
-
-
-npx create-next-app@latest ./ --typescript --tailwind --eslint
+Main file -> Page.tsx
+14:10
