@@ -40,6 +40,13 @@ layout.tsx can also be overridden if in same folder as "()" for its sibling page
 
 main default page.tsx is inside (main) folder, but since its just organizational it is picked up as default path by next js
 
+[[...folder-Name]] used for Clerk to work for routing in NextJS
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
 Here the 2nd class took priority
 
 TailwindCSS -> Use classname in UIs to apply pre-defined styles

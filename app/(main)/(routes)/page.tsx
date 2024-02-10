@@ -1,5 +1,6 @@
 // import Image from "next/image";
 
+import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +13,7 @@ export default function Home() {
     <Button className={cn("bg-indigo-500", true&&"bg-red-500")}>
       This is ShadcnUI button ok
     </Button>
+    <ModeToggle></ModeToggle>
     </div>
   );
 }
