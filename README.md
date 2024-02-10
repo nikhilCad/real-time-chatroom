@@ -21,6 +21,8 @@ In libs/util, Shadcn has gives us a util called cn in div for styling
 </Button>
 ```
 
+Use layout.tsx to change metadat info for your site
+
 Here the 2nd class took priority
 
 TailwindCSS -> Use classname in UIs to apply pre-defined styles
