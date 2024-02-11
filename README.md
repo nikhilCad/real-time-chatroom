@@ -71,4 +71,4 @@ To create a key for environment variable, set it for NEXTAUTH_SECRET environment
 For database, use prism init and provide the value to DATABASE_URLin .env file, this project uses Supabase
 
 Main file -> Page.tsx
-1:00:00
+1:19:20

@@ -6,10 +6,20 @@ import Link from "next/link"
 import { cn } from "@/lib/utils";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
+import { db } from "@/lib/db";
 
 export default async function Home() {
 
   const session = await getServerSession(options)
+
+  //db is from prisma, hosted at Supabase for this project
+  
+  const profile = await db.profile.findUnique({
+    where: {
+      userId: user.id
+    }
+  })
+
   //This page will only show when logged in
   return (
     <div>
