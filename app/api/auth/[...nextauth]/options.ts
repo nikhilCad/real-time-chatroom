@@ -8,26 +8,27 @@ export const options: NextAuthOptions = {
             clientId: process.env.GITHUB_ID as string,
             clientSecret: process.env.GITHUB_SECRET as string,
         }),
-        CredentialsProvider({
-            name: "Credentials",
-            credentials: {
-                username: {
-                    label: "Username:",
-                    type: "text",
-                    placeholder: "your-cool-username"
-                },
-                password: {
-                    label: "Password:",
-                    type: "password",
-                    placeholder: "your-awesome-password"
-                }
-            },
-            async authorize(credentials) {
-                // (TODO) do input validation of credentials
-                //also increment the id
+        //Credentials are security and validation nightmare, lets skip for now
+        // CredentialsProvider({
+        //     name: "Credentials",
+        //     credentials: {
+        //         username: {
+        //             label: "Username:",
+        //             type: "text",
+        //             placeholder: "your-cool-username"
+        //         },
+        //         password: {
+        //             label: "Password:",
+        //             type: "password",
+        //             placeholder: "your-awesome-password"
+        //         }
+        //     },
+        //     async authorize(credentials) {
+        //         // (TODO) do input validation of credentials
+        //         //also increment the id
 
-                return {id: "1", name: credentials?.username, password: credentials?.password}
-            }
-        })
+        //         return {id: "1", name: credentials?.username, password: credentials?.password}
+        //     }
+        // })
     ],
 }
