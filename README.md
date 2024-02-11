@@ -59,6 +59,8 @@ npx prisma generate
 npx prisma db push
 ```
 
+use ```npx prisma studio`` for debugging prisma
+
 
 **To put in the .env file**
 

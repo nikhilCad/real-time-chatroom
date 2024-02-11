@@ -12,11 +12,11 @@ datasource db {
 
 model Profile {
   id String @id @default(uuid())
-  userId String @unique
+  //userId String @unique
   name String
   //db.Text has larger size
   imageUrl String @db.Text
-  email String @db.Text
+  email String @db.Text @unique
 
   //used for relation with Server model below
   servers Server[]
