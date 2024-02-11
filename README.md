@@ -10,6 +10,14 @@ localhost at port 3000
 
 Next.JS -> Framework used with React
 
+Next-Auth -> Used for user authentication
+
+Use 
+```
+openssl rand -base64 32 
+```
+To create a key for environmnet variable, set it for NEXTAUTH_SECRET environment variable
+
 Shadcn UI -> Component library, can install only the components we need not entire library
 
 Our Shadcn components/ui are present in the components directory, so if we want we can edit them unlike other component libraries
