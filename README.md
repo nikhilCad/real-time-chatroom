@@ -53,6 +53,12 @@ Here the 2nd class took priority
 TailwindCSS -> Use classname in UIs to apply pre-defined styles
 Typescript is used
 
+**Commands after modifying prisma schema file, push data to db**
+```
+npx prisma generate
+npx prisma db push
+```
+
 
 **To put in the .env file**
 
