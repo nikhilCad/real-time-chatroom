@@ -9,3 +9,36 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Profile {
+  id String @id @default(uuid())
+  userId String @unique
+  name String
+  //db.Text has larger size
+  imageUrl String @db.Text
+  email String @db.Text
+
+  //used for relation with Server model below
+  servers Server[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Server {
+  id String @id @default(uuid())
+  name String
+  imageUrl String @db.Text
+  inviteCode String @unique
+
+  profileId String
+  //Now connect to the Profile model above
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //unique index for relation purpose
+  @@index([profileId])
+}

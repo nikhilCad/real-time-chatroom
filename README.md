@@ -12,12 +12,6 @@ Next.JS -> Framework used with React
 
 Next-Auth -> Used for user authentication
 
-Use 
-```
-openssl rand -base64 32 
-```
-To create a key for environmnet variable, set it for NEXTAUTH_SECRET environment variable
-
 Shadcn UI -> Component library, can install only the components we need not entire library
 
 Our Shadcn components/ui are present in the components directory, so if we want we can edit them unlike other component libraries
@@ -29,6 +23,10 @@ In libs/util, Shadcn has gives us a util called cn in div for styling
     This is ShadcnUI button
 </Button>
 ```
+
+Supabase used as database host (Postgresql), mainly because it has a free tier :)
+
+Prism used to define schema to be used in the application
 
 Use layout.tsx to change metadata info for your site
 
@@ -54,6 +52,17 @@ Here the 2nd class took priority
 
 TailwindCSS -> Use classname in UIs to apply pre-defined styles
 Typescript is used
+
+
+**To put in the .env file**
+
+Use 
+```
+openssl rand -base64 32 
+```
+To create a key for environment variable, set it for NEXTAUTH_SECRET environment variable
+
+For database, use prism init and provide the value to DATABASE_URLin .env file, this project uses Supabase
 
 Main file -> Page.tsx
 1:00:00
