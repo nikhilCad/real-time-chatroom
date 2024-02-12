@@ -10,7 +10,7 @@ localhost at port 3000
 
 Next.JS -> Framework used with React
 
-Next-Auth -> Used for user authentication
+Clerk -> User authentication
 
 Shadcn UI -> Component library, can install only the components we need not entire library
 
@@ -64,13 +64,7 @@ use ```npx prisma studio`` for debugging prisma
 
 **To put in the .env file**
 
-Use 
-```
-openssl rand -base64 32 
-```
-To create a key for environment variable, set it for NEXTAUTH_SECRET environment variable
-
-For database, use prism init and provide the value to DATABASE_URLin .env file, this project uses Supabase
+For database, use prism init and provide the value to DATABASE_URL in .env file, this project uses Supabase
 
 Main file -> Page.tsx
 1:19:20
