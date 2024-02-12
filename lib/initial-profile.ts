@@ -1,36 +1,37 @@
-import { getServerSession } from "next-auth";
-import { options } from "@/app/api/auth/[...nextauth]/options";
+import { currentUser, redirectToSignIn } from "@clerk/nextjs";
 
 import { db } from "@/lib/db";
 
 export const initialProfile = async () => {
-    console.log(options)
-    const session = await getServerSession(options)
+  const user = await currentUser();
 
-    console.log("hi");
+  if (!user) {
+    //function from clerk
+    return redirectToSignIn();
+  }
 
-    //db is from prisma, hosted at Supabase for this project
-  
-    const profile = await db.profile.findUnique({
-        where: {
-          email: session?.user?.email || ""
-        }
-      })
-      
+  //db initialized from our lib folder
+  const profile = await db.profile.findUnique({
+    where: {
+      userId: user.id
+    }
+  });
 
+
+  //if profile exists, return that profile
   if (profile) {
     return profile;
   }
 
+  //else create a new profile and return that
   const newProfile = await db.profile.create({
     data: {
-      name: session?.user?.email || "",
-      imageUrl: session?.user?.image || "",
-      email: session?.user?.email || ""
+      userId: user.id,
+      name: `${user.firstName} ${user.lastName}`,
+      imageUrl: user.imageUrl,
+      email: user.emailAddresses[0].emailAddress
     }
   });
-
-  console.log(newProfile)
 
   return newProfile;
 };

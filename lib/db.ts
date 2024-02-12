@@ -4,6 +4,8 @@ import { PrismaClient } from "@prisma/client";
 //Does not matter in production, but in development
 //too many prisma client can get initialized on each code save
 
+//globalThis not affected by hot reload during development
+
 //From official docs of prisma
 declare global {
   var prisma: PrismaClient | undefined;

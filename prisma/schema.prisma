@@ -12,9 +12,9 @@ datasource db {
 
 model Profile {
   id String @id @default(uuid())
-  //userId String @unique
+  userId String @unique
   name String
-  //db.Text has larger size
+  //db.Text has larger size, more characters
   imageUrl String @db.Text
   email String @db.Text @unique
 
@@ -58,6 +58,7 @@ enum MemberRole {
 
 model Member {
   id String @id @default(uuid())
+  //member is by default a Guest
   role MemberRole @default(GUEST)
 
   profileId String
@@ -84,6 +85,7 @@ enum ChannelType {
 model Channel {
   id String @id @default(uuid())
   name String
+  //By default text
   type ChannelType @default(TEXT)
 
   profileId String
