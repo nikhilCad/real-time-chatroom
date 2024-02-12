@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link"
 import { cn } from "@/lib/utils";
 import { db } from "@/lib/db";
+import { UserButton } from "@clerk/nextjs";
 //import { options } from "@/app/api/auth/[...nextauth]/options";
 //import { getServerSession } from "next-auth";
 // import { db } from "@/lib/db";
@@ -50,6 +51,8 @@ const Home =  async() => {
     {/* <img src={profile?.imageUrl}></img> */}
 
     <Button> <Link href="/api/auth/signout">Sign Out</Link> </Button>
+
+    <UserButton afterSignOutUrl="/"/>
       
     
     </div>
