@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 import { initialProfile } from "@/lib/initial-profile";
-// import { InitialModal } from "@/components/modals/initial-modal";
+import { InitialModal } from "@/components/modals/initial-modal";
 
 const SetupPage = async () => {
   const profile = await initialProfile();
@@ -25,9 +25,9 @@ const SetupPage = async () => {
   }
 
   //if not in server show this text
-  return <p>No server, seems pretty quite here</p>
+  // return <p>No server, seems pretty quite here</p>
 
-//   return <InitialModal />;
+  return <InitialModal />;
 }
  
 export default SetupPage;
