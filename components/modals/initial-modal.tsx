@@ -17,16 +17,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-// import {
-//   Form,
-//   FormControl,
-//   FormField,
-//   FormItem,
-//   FormLabel,
-//   FormMessage
-// } from "@/components/ui/form";
-// import { Input } from "@/components/ui/input";
-// import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 // import { FileUpload } from "@/components/file-upload";
 // import { useRouter } from "next/navigation";
 
@@ -88,7 +88,8 @@ export const InitialModal = () => {
             Give your server a personality with a name and an image. You can always change it later.
           </DialogDescription>
         </DialogHeader>
-        {/* <Form {...form}>
+        {/* form from useFrom */}
+        <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-8 px-6">
               <div className="flex items-center justify-center text-center">
@@ -98,11 +99,11 @@ export const InitialModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <FileUpload
+                        {/* <FileUpload
                           endpoint="serverImage"
                           value={field.value}
                           onChange={field.onChange}
-                        />
+                        /> */}
                       </FormControl>
                     </FormItem>
                   )}
@@ -124,6 +125,7 @@ export const InitialModal = () => {
                         disabled={isLoading}
                         className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                         placeholder="Enter server name"
+                        // Contains all necessary onchange onblur etc
                         {...field}
                       />
                     </FormControl>
@@ -138,7 +140,7 @@ export const InitialModal = () => {
               </Button>
             </DialogFooter>
           </form>
-        </Form> */}
+        </Form>
       </DialogContent>
     </Dialog>
   )
