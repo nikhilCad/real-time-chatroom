@@ -7,7 +7,7 @@ import * as z from "zod";
 //zodresolver to validate form using form schema
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Dialog,
@@ -41,13 +41,14 @@ const formSchema = z.object({
 });
 
 export const InitialModal = () => {
-  // const [isMounted, setIsMounted] = useState(false);
+  // to supress hydration errors
+  const [isMounted, setIsMounted] = useState(false);
 
   // const router = useRouter();
 
-  // useEffect(() => {
-  //   setIsMounted(true);
-  // }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -72,9 +73,9 @@ export const InitialModal = () => {
     console.log(values);
   }
 
-  // if (!isMounted) {
-  //   return null;
-  // }
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Dialog open>
@@ -129,6 +130,7 @@ export const InitialModal = () => {
                         {...field}
                       />
                     </FormControl>
+                    {/* Gives error message to trying to create server without required fields */}
                     <FormMessage />
                   </FormItem>
                 )}
