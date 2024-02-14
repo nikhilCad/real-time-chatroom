@@ -53,6 +53,8 @@ Here the 2nd class took priority
 TailwindCSS -> Use classname in UIs to apply pre-defined styles
 Typescript is used
 
+UploadThing -> Big data server, for file uploads, upto 2GB overall
+
 **Commands after modifying prisma schema file, push data to db**
 ```
 npx prisma generate
@@ -64,7 +66,20 @@ use ```npx prisma studio`` for debugging prisma
 
 **To put in the .env file**
 
+```
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+DATABASE_URL for Prisma
+
+UPLOADTHING_SECRET
+UPLOADTHING_APP_ID
+
+```
+
 For database, use prism init and provide the value to DATABASE_URL in .env file, this project uses Supabase
 
 Main file -> Page.tsx
-1:19:20
+1:47:20
