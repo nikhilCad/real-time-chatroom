@@ -6,6 +6,7 @@ import Image from "next/image";
 //Ready to use upload zone provided by uploadthing library
 import { UploadDropzone } from "@/lib/uploadthing";
 
+//what does this component take -> interface
 interface FileUploadProps {
   onChange: (url?: string) => void;
   value: string;
@@ -18,9 +19,11 @@ export const FileUpload = ({
   value,
   endpoint
 }: FileUploadProps) => {
+    //check filetype from the uploaded url
   const fileType = value?.split(".").pop();
 
   if (value && fileType !== "pdf") {
+      //image, as only 2 types
     return (
       <div className="relative h-20 w-20">
         <Image
@@ -30,6 +33,7 @@ export const FileUpload = ({
           className="rounded-full"
         />
         <button
+        //onChange argument is empty, ie delete
           onClick={() => onChange("")}
           className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
           type="button"
@@ -67,6 +71,7 @@ export const FileUpload = ({
     <UploadDropzone
       endpoint={endpoint}
       onClientUploadComplete={(res) => {
+          //prop function onchange
         onChange(res?.[0].url);
       }}
       onUploadError={(error: Error) => {
