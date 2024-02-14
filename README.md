@@ -85,4 +85,4 @@ UPLOADTHING_APP_ID
 For database, use prism init and provide the value to DATABASE_URL in .env file, this project uses Supabase
 
 Main file -> Page.tsx
-2:00:00
+2:09:30
