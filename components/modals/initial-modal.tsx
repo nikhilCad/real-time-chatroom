@@ -101,6 +101,7 @@ export const InitialModal = () => {
                     <FormItem>
                       <FormControl>
                         <FileUpload
+                        //endpoint from core.ts for uploadthing
                           endpoint="serverImage"
                           value={field.value}
                           onChange={field.onChange}

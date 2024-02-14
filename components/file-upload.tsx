@@ -6,11 +6,10 @@ import Image from "next/image";
 //Ready to use upload zone provided by uploadthing library
 import { UploadDropzone } from "@/lib/uploadthing";
 
-import "@uploadthing/react/styles.css";
-
 interface FileUploadProps {
   onChange: (url?: string) => void;
   value: string;
+  //endpoint from core.ts 'ourFileRouter' for uploadthing
   endpoint: "messageFile" | "serverImage"
 }
 
