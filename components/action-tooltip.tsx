@@ -21,9 +21,11 @@ export const ActionTooltip = ({
   align
 }: ActionTooltipProps) => {
   return (
+    //Tooltip helper with styling
     <TooltipProvider>
       <Tooltip delayDuration={50}>
         <TooltipTrigger asChild>
+          {/* This component should be parent of object whose tooltip it gives */}
           {children}
         </TooltipTrigger>
         <TooltipContent side={side} align={align}>

@@ -12,6 +12,8 @@ interface NavigationItemProps {
   name: string;
 };
 
+//Displays image for the server in the sidebar
+
 export const NavigationItem = ({
   id,
   imageUrl,
@@ -20,6 +22,7 @@ export const NavigationItem = ({
   const params = useParams();
   const router = useRouter();
 
+  //When click on sidebar, go to that specific server
   const onClick = () => {
     router.push(`/servers/${id}`);
   }
@@ -36,6 +39,7 @@ export const NavigationItem = ({
       >
         <div className={cn(
           "absolute left-0 bg-primary rounded-r-full transition-all w-[4px]",
+          //Gives border for current server/other server hover
           params?.serverId !== id && "group-hover:h-[20px]",
           params?.serverId === id ? "h-[36px]" : "h-[8px]"
         )} />
