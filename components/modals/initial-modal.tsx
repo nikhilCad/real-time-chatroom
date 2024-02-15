@@ -2,7 +2,7 @@
 //use client as will have a form with interactivty
 //https://nextjs.org/_next/image?url=%2Fdocs%2Fdark%2Fuse-client-directive.png&w=1920&q=75&dpl=dpl_9jHBDYu1adgHNRHSZgTvrFHmRNzx
 
-// import axios from "axios";
+import axios from "axios";
 import * as z from "zod";
 //zodresolver to validate form using form schema
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,7 +28,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 //schema for our form that is validated by zod
 const formSchema = z.object({
@@ -44,7 +44,7 @@ export const InitialModal = () => {
   // to supress hydration errors
   const [isMounted, setIsMounted] = useState(false);
 
-  // const router = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
@@ -61,15 +61,16 @@ export const InitialModal = () => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // try {
-    //   await axios.post("/api/servers", values);
+    try {
+      //axis used to make api requests
+      await axios.post("/api/servers", values);
 
-    //   form.reset();
-    //   router.refresh();
-    //   window.location.reload();
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      form.reset();
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
     console.log(values);
   }
 

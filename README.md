@@ -55,6 +55,8 @@ Typescript is used
 
 UploadThing -> Big data server, for file uploads, upto 2GB overall
 
+Axios -> Axios is a promise-based HTTP library that lets developers make requests to either their own or a third-party server to fetch data
+
 **Commands after modifying prisma schema file, push data to db**
 ```
 npx prisma generate
@@ -85,4 +87,4 @@ UPLOADTHING_APP_ID
 For database, use prism init and provide the value to DATABASE_URL in .env file, this project uses Supabase
 
 Main file -> Page.tsx
-2:09:30
+2:19:30
