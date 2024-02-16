@@ -5,6 +5,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
                 storage-key="discord-theme"
                 disableTransitionOnChange
               >
+                <ModalProvider/>
                 {children}
           </ThemeProvider>
         </body>

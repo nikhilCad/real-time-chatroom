@@ -16,7 +16,7 @@ export function ModeToggle() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <Button variant="outline" size="icon" onClick={
+    <Button className="bg-transparent border-0" variant="outline" size="icon" onClick={
 
         () => 
             {

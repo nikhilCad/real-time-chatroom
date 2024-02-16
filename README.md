@@ -50,12 +50,19 @@ main default page.tsx is inside (main) folder, but since its just organizational
 
 Here the 2nd class took priority
 
+"use client"
+
+both react and client components are server side rendering but this client is also rendered on the client -> can cause hydration errors. One state rendered on server, another state rendered on client
+
+
 TailwindCSS -> Use classname in UIs to apply pre-defined styles
 Typescript is used
 
 UploadThing -> Big data server, for file uploads, upto 2GB overall
 
 Axios -> Axios is a promise-based HTTP library that lets developers make requests to either their own or a third-party server to fetch data
+
+Zustand -> Global state management
 
 **Commands after modifying prisma schema file, push data to db**
 ```
@@ -87,4 +94,4 @@ UPLOADTHING_APP_ID
 For database, use prism init and provide the value to DATABASE_URL in .env file, this project uses Supabase
 
 Main file -> Page.tsx
-2:49:20
+3:01:06
