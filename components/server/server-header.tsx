@@ -37,6 +37,7 @@ export const ServerHeader = ({
   const { onOpen } = useModal();
 
   const isAdmin = role === MemberRole.ADMIN;
+  //every admin is a moderator
   const isModerator = isAdmin || role === MemberRole.MODERATOR;
 
   return (
@@ -51,13 +52,15 @@ export const ServerHeader = ({
           {server.name}
           <ChevronDown className="h-5 w-5 ml-auto" />
         </button>
+        {/* This menu is at top of channel list where the server name is written */}
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]"
       >
+          {/* Different dropdown options based on your channel role */}
         {isModerator && (
           <DropdownMenuItem
-            // onClick={() => onOpen("invite", { server })}
+            onClick={() => onOpen("invite", { server })}
             className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer"
           >
             Invite People
@@ -66,7 +69,7 @@ export const ServerHeader = ({
         )}
         {isAdmin && (
           <DropdownMenuItem
-            // onClick={() => onOpen("editServer", { server })}
+            onClick={() => onOpen("editServer", { server })}
             className="px-3 py-2 text-sm cursor-pointer"
           >
             Server Settings
@@ -75,7 +78,7 @@ export const ServerHeader = ({
         )}
         {isAdmin && (
           <DropdownMenuItem
-            // onClick={() => onOpen("members", { server })}
+            onClick={() => onOpen("members", { server })}
             className="px-3 py-2 text-sm cursor-pointer"
           >
             Manage Members
@@ -84,7 +87,7 @@ export const ServerHeader = ({
         )}
         {isModerator && (
           <DropdownMenuItem
-            // onClick={() => onOpen("createChannel")}
+            onClick={() => onOpen("createChannel")}
             className="px-3 py-2 text-sm cursor-pointer"
           >
             Create Channel
@@ -92,20 +95,23 @@ export const ServerHeader = ({
           </DropdownMenuItem>
         )}
         {isModerator && (
+            //A separator before the delete server button
           <DropdownMenuSeparator />
         )}
         {isAdmin && (
           <DropdownMenuItem
-            // onClick={() => onOpen("deleteServer", { server })}
+            onClick={() => onOpen("deleteServer", { server })}
+            //make delete server button red using text-rose-500
             className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
           >
             Delete Server
             <Trash className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
+        {/* Admins can not leave their server, the can delete it though */}
         {!isAdmin && (
           <DropdownMenuItem
-            // onClick={() => onOpen("leaveServer", { server })}
+            onClick={() => onOpen("leaveServer", { server })}
             className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
           >
             Leave Server

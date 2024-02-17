@@ -4,19 +4,22 @@ import { create } from "zustand";
 //All our modals
 export type ModalType = "createServer" | "invite" | "editServer" | "members" | "createChannel" | "leaveServer" | "deleteServer" | "deleteChannel" | "editChannel" | "messageFile" | "deleteMessage";
 
-// interface ModalData {
-//   server?: Server;
-//   channel?: Channel;
-//   channelType?: ChannelType;
-//   apiUrl?: string;
-//   query?: Record<string, any>;
-// }
+//Different modals to accomodate the dropdown menu that opens when your click server name
+//in channels list, for fucitons like invite, delete server, leave server, create channels etc
+interface ModalData {
+  server?: Server;
+  channel?: Channel;
+  channelType?: ChannelType;
+  apiUrl?: string;
+  query?: Record<string, any>;
+}
 
 interface ModalStore {
   type: ModalType | null;
-//   data: ModalData;
+  data: ModalData;
   isOpen: boolean;
-  onOpen: (type: ModalType) => void; //, data?: ModalData) => void;
+  //data optional prop to be used for server options like invite, server settings, delete etc
+  onOpen: (type: ModalType, data?: ModalData) => void;
   onClose: () => void;
 }
 
@@ -24,6 +27,6 @@ export const useModal = create<ModalStore>((set) => ({
   type: null,
   data: {},
   isOpen: false,
-  onOpen: (type, data = {}) => set({ isOpen: true, type}), //, data }),
+  onOpen: (type, data = {}) => set({ isOpen: true, type, data }),
   onClose: () => set({ type: null, isOpen: false })
 }));
