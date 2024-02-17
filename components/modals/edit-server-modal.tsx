@@ -54,6 +54,7 @@ export const EditServerModal = () => {
 
   useEffect(() => {
     if (server) {
+      //set default values from the database that the user can then edit
       form.setValue("name", server.name);
       form.setValue("imageUrl", server.imageUrl);
     }
@@ -63,6 +64,7 @@ export const EditServerModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      //patch rest request
       await axios.patch(`/api/servers/${server?.id}`, values);
 
       form.reset();

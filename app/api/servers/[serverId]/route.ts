@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+
+//Used in Edit server modal
+
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
@@ -30,6 +33,7 @@ export async function DELETE(
   }
 }
 
+//PATCH REST API request
 export async function PATCH(
   req: Request,
   { params }: { params: { serverId: string } }
@@ -43,9 +47,11 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
+    //update server with the params
     const server = await db.server.update({
       where: {
         id: params.serverId,
+        //only admin can modify server settings
         profileId: profile.id,
       },
       data: {
