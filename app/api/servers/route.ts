@@ -24,6 +24,7 @@ export async function POST(req: Request) {
         imageUrl,
         //randomly generated uuid
         inviteCode: uuidv4(),
+        //default channel in every server that is created
         channels: {
           create: [
             { name: "general", profileId: profile.id }
