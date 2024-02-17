@@ -14,12 +14,13 @@ import { Label } from "@/components/ui/label";
 import { useModal } from "@/hooks/use-modal-store";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-// import { useOrigin } from "@/hooks/use-origin";
+import { useOrigin } from "@/hooks/use-origin";
 
 //File is same as Initial Modal.tsx with some differences, like the form is removed
 export const InviteModal = () => {
   const { onOpen, isOpen, onClose, type, data } = useModal();
-//   const origin = useOrigin();
+  //gets the window url
+  const origin = useOrigin();
 
     //from use-model-store.ts get the "invite", this "invite" string is passed as prop to the dropdown
     //and from there it finally reaches this file to be open the actual modal
@@ -29,9 +30,11 @@ export const InviteModal = () => {
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  //invite code is in the server object
   const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
 
   const onCopy = () => {
+    //copy to clipboard on clicking the copy button
     navigator.clipboard.writeText(inviteUrl);
     setCopied(true);
 
@@ -40,9 +43,15 @@ export const InviteModal = () => {
     }, 1000);
   };
 
+  //Generate new invite link
   const onNew = async () => {
     try {
       setIsLoading(true);
+      //routing defined in invite-code/route.ts
+      //also note that each server has ONLY ONE invite code
+      //so if you recreate an invite code for a server using generate new button
+      //and try to join server with the old invite code
+      //it wont work as that old value no longer exists in the databse
       const response = await axios.patch(`/api/servers/${server?.id}/invite-code`);
 
       onOpen("invite", { server: response.data });
