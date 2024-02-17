@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-// import qs from "query-string";
+import qs from "query-string";
 import { 
   Check,
   Gavel,
@@ -25,8 +25,8 @@ import {
 } from "@/components/ui/dialog";
 import { useModal } from "@/hooks/use-modal-store";
 import { ServerWithMembersWithProfiles } from "@/types";
-// import { ScrollArea } from "@/components/ui/scroll-area";
-// import { UserAvatar } from "@/components/user-avatar";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { UserAvatar } from "@/components/user-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,6 +39,8 @@ import {
   DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu";
 
+//Icon in member list based on the role
+//Roles from prisma schema
 const roleIconMap = {
   "GUEST": null,
   "MODERATOR": <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
@@ -51,22 +53,28 @@ export const MembersModal = () => {
   const [loadingId, setLoadingId] = useState("");
 
   const isModalOpen = isOpen && type === "members";
+  //casting fix so typescript does not throw an error
+  //remember this server variable is different and defined in
+  //types.ts
   const { server } = data as { server: ServerWithMembersWithProfiles };
 
   const onKick = async (memberId: string) => {
     try {
       setLoadingId(memberId);
-    //   const url = qs.stringifyUrl({
-    //     url: `/api/members/${memberId}`,
-    //     query: {
-    //       serverId: server?.id,
-    //     },
-    //   });
+      //qs is a simple helper to make readable urls with with queries
+      //it just outputs a string
+      //but is more readable now than doing string formatting
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id,
+        },
+      });
 
-    //   const response = await axios.delete(url);
+      const response = await axios.delete(url);
 
-    //   router.refresh();
-    //   onOpen("members", { server: response.data });
+      router.refresh();
+      onOpen("members", { server: response.data });
     } catch (error) {
       console.log(error);
     } finally {
@@ -77,17 +85,19 @@ export const MembersModal = () => {
   const onRoleChange = async (memberId: string, role: MemberRole) => {
     try {
       setLoadingId(memberId);
-    //   const url = qs.stringifyUrl({
-    //     url: `/api/members/${memberId}`,
-    //     query: {
-    //       serverId: server?.id,
-    //     }
-    //   });
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: {
+          serverId: server?.id,
+        }
+      });
 
-    //   const response = await axios.patch(url, { role });
+      //use axios to send the request
+      const response = await axios.patch(url, { role });
 
-    //   router.refresh();
-    //   onOpen("members", { server: response.data });
+      //update server components
+      router.refresh();
+      onOpen("members", { server: response.data });
     } catch (error) {
       console.log(error);
     } finally {
@@ -108,7 +118,8 @@ export const MembersModal = () => {
             {server?.members?.length} Members
           </DialogDescription>
         </DialogHeader>
-        {/* <ScrollArea className="mt-8 max-h-[420px] pr-6">
+        {/* As there will be too many members we wrap them in a scroll area */}
+        <ScrollArea className="mt-8 max-h-[420px] pr-6">
           {server?.members?.map((member) => (
             <div key={member.id} className="flex items-center gap-x-2 mb-6">
               <UserAvatar src={member.profile.imageUrl} />
@@ -121,6 +132,8 @@ export const MembersModal = () => {
                   {member.profile.email}
                 </p>
               </div>
+              {/* Actions on user like giving role, ban etc
+              Cant give roles to yourself! */}
               {server.profileId !== member.profileId && loadingId !== member.id && (
                 <div className="ml-auto">
                   <DropdownMenu>
@@ -129,6 +142,7 @@ export const MembersModal = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent side="left">
                       <DropdownMenuSub>
+                        {/* Changing roles */}
                         <DropdownMenuSubTrigger
                           className="flex items-center"
                         >
@@ -139,6 +153,7 @@ export const MembersModal = () => {
                         </DropdownMenuSubTrigger>
                         <DropdownMenuPortal>
                           <DropdownMenuSubContent>
+                            {/* Role options */}
                             <DropdownMenuItem
                               onClick={() => onRoleChange(member.id, "GUEST")}
                             >
@@ -165,6 +180,7 @@ export const MembersModal = () => {
                         </DropdownMenuPortal>
                       </DropdownMenuSub>
                       <DropdownMenuSeparator />
+                      {/* Ban the user */}
                       <DropdownMenuItem
                         onClick={() => onKick(member.id)}
                       >
@@ -182,7 +198,7 @@ export const MembersModal = () => {
               )}
             </div>
           ))}
-        </ScrollArea> */}
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   )
