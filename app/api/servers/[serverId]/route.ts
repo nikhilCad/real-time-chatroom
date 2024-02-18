@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
+//Delete server as an admin
 export async function DELETE(
   req: Request,
   //serverId is the name of the parent folder
@@ -22,6 +23,7 @@ export async function DELETE(
     const server = await db.server.delete({
       where: {
         id: params.serverId,
+        //check if user is admin
         profileId: profile.id,
       }
     });

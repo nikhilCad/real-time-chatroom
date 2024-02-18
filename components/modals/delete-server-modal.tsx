@@ -15,6 +15,8 @@ import {
 import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "@/components/ui/button";
 
+
+//Delete server, can ONLY be done by an admin
 export const DeleteServerModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
@@ -28,6 +30,7 @@ export const DeleteServerModal = () => {
     try {
       setIsLoading(true);
 
+      //call delete from this endpoit
       await axios.delete(`/api/servers/${server?.id}`);
 
       onClose();
