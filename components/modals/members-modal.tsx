@@ -71,6 +71,7 @@ export const MembersModal = () => {
         },
       });
 
+      //call the delete function from route.ts in members/[memberId]
       const response = await axios.delete(url);
 
       router.refresh();
