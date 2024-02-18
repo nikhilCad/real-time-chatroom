@@ -15,6 +15,8 @@ import {
 import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "@/components/ui/button";
 
+//Leave server button is ONLY shown if you are not an admin
+//admin cant leave server, they can only delete it entirely
 export const LeaveServerModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
@@ -28,6 +30,7 @@ export const LeaveServerModal = () => {
     try {
       setIsLoading(true);
 
+      //execute the leave API request
       await axios.patch(`/api/servers/${server?.id}/leave`);
 
       onClose();

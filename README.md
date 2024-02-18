@@ -60,7 +60,7 @@ Typescript is used
 
 UploadThing -> Big data server, for file uploads, upto 2GB overall
 
-Axios -> Axios is a promise-based HTTP library that lets developers make requests to either their own or a third-party server to fetch data
+Axios -> Axios is a promise-based HTTP library that lets developers make requests to either their own or a third-party server to fetch data -> Used for CRUD operations
 
 Zustand -> Global state management
 
