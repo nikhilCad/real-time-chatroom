@@ -1,5 +1,5 @@
 # real-time-chatroom
-A real time chatroom built with MERN stack
+A real time chatroom
 
 to run -> 
 ```
