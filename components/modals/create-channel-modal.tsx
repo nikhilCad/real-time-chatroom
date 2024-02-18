@@ -1,6 +1,6 @@
 "use client";
 
-// import qs from "query-string";
+import qs from "query-string";
 import axios from "axios";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,24 +26,26 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useParams, useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue
-// } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 import { useEffect } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1, {
     message: "Channel name is required."
   }).refine(
+    //general is the default channel, so cant add it!
     name => name !== "general",
     {
       message: "Channel name cannot be 'general'"
     }
   ),
+  //ChannelType from our Prisma Schema
   type: z.nativeEnum(ChannelType)
 });
 
@@ -59,6 +61,7 @@ export const CreateChannelModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      //default channel type is text
       type: channelType || ChannelType.TEXT,
     }
   });
@@ -75,13 +78,13 @@ export const CreateChannelModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-    //   const url = qs.stringifyUrl({
-    //     url: "/api/channels",
-    //     query: {
-    //       serverId: params?.serverId
-    //     }
-    //   });
-    //   await axios.post(url, values);
+      const url = qs.stringifyUrl({
+        url: "/api/channels",
+        query: {
+          serverId: params?.serverId
+        }
+      });
+      await axios.post(url, values);
 
       form.reset();
       router.refresh();
@@ -107,6 +110,7 @@ export const CreateChannelModal = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-8 px-6">
+            {/* Similar to the server create modal */}
               <FormField
                 control={form.control}
                 name="name"
@@ -135,7 +139,7 @@ export const CreateChannelModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Channel Type</FormLabel>
-                    {/* <Select
+                    <Select
                       disabled={isLoading}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -148,6 +152,7 @@ export const CreateChannelModal = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
+                        {/* Map the avaialable types in selectControl */}
                         {Object.values(ChannelType).map((type) => (
                           <SelectItem
                             key={type}
@@ -158,7 +163,7 @@ export const CreateChannelModal = () => {
                           </SelectItem>
                         ))}
                       </SelectContent>
-                    </Select> */}
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
