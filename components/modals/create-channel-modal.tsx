@@ -66,10 +66,13 @@ export const CreateChannelModal = () => {
     }
   });
 
+  //If adding new channel from {type}, modal default should be {type}
+  //modal opened from video channel + button should have video channel as default
   useEffect(() => {
     if (channelType) {
       form.setValue("type", channelType);
     } else {
+      //default case
       form.setValue("type", ChannelType.TEXT);
     }
   }, [channelType, form]);

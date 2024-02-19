@@ -17,6 +17,7 @@ interface ServerMemberProps {
   server: Server;
 }
 
+//different icon based on role
 const roleIconMap = {
   [MemberRole.GUEST]: null,
   [MemberRole.MODERATOR]: <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
@@ -30,6 +31,7 @@ export const ServerMember = ({
   const params = useParams();
   const router = useRouter();
 
+  //icon based on props suplied
   const icon = roleIconMap[member.role];
 
   const onClick = () => {
