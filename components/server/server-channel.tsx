@@ -13,12 +13,17 @@ import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { ModalType, useModal } from "@/hooks/use-modal-store";
 
+//The LIST of all the channels (3 types) depending on props
+//This is rendered below the header which the add channel
+//members in server-member.tsx
+
 interface ServerChannelProps {
   channel: Channel;
   server: Server;
   role?: MemberRole;
 }
 
+//icon next to each channel
 const iconMap = {
   [ChannelType.TEXT]: Hash,
   [ChannelType.AUDIO]: Mic,
@@ -34,12 +39,16 @@ export const ServerChannel = ({
   const params = useParams();
   const router = useRouter();
 
+  //get icon based on the props
   const Icon = iconMap[channel.type];
 
+  //redirect to channel on click
   const onClick = () => {
     router.push(`/servers/${params?.serverId}/channels/${channel.id}`)
   }
 
+  //prevent default action of mouseclick on the Edit or Delete button
+  //instead just open the Modal
   const onAction = (e: React.MouseEvent, action: ModalType) => {
     e.stopPropagation();
     onOpen(action, { channel, server });
@@ -48,6 +57,8 @@ export const ServerChannel = ({
   return (
     <button
       onClick={onClick}
+
+      //Current channel has slightly different css
       className={cn(
         "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition mb-1",
         params?.channelId === channel.id && "bg-zinc-700/20 dark:bg-zinc-700"
@@ -60,11 +71,14 @@ export const ServerChannel = ({
       )}>
         {channel.name}
       </p>
+
+      {/* Not general channel, so we can change name or even delete */}
       {channel.name !== "general" && role !== MemberRole.GUEST && (
         <div className="ml-auto flex items-center gap-x-2">
           <ActionTooltip label="Edit">
             <Edit
               onClick={(e) => onAction(e, "editChannel")}
+              //Button only visible on hover
               className="hidden group-hover:block w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
             />
           </ActionTooltip>
@@ -76,6 +90,8 @@ export const ServerChannel = ({
           </ActionTooltip>
         </div>
       )}
+
+      {/* general channel, cant edit or delete, display a lock */}
       {channel.name === "general" && (
         <Lock
           className="ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400"

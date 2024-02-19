@@ -16,6 +16,9 @@ interface ServerSectionProps {
 };
 
 //A section of channels(all 3 types) or list of members
+//It is the HEADER not the list
+//The list is in server-channel.tsx
+//The members list is in server-member.tsx
 export const ServerSection = ({
   label,
   role,
