@@ -15,6 +15,7 @@ interface ServerSectionProps {
   server?: ServerWithMembersWithProfiles;
 };
 
+//A section of channels(all 3 types) or list of members
 export const ServerSection = ({
   label,
   role,
@@ -29,9 +30,11 @@ export const ServerSection = ({
       <p className="text-xs uppercase font-semibold text-zinc-500 dark:text-zinc-400">
         {label}
       </p>
+      {/* Create channel button */}
       {role !== MemberRole.GUEST && sectionType === "channels" && (
         <ActionTooltip label="Create Channel" side="top">
           <button
+          //Create button will open with current channel type pre selected
             onClick={() => onOpen("createChannel", { channelType })}
             className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
           >
@@ -39,6 +42,7 @@ export const ServerSection = ({
           </button>
         </ActionTooltip>
       )}
+      {/* Manage members button */}
       {role === MemberRole.ADMIN && sectionType === "members" && (
         <ActionTooltip label="Manage Members" side="top">
           <button

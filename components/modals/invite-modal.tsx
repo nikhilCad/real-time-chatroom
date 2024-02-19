@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useOrigin } from "@/hooks/use-origin";
 
+//The other just have to paste the invite code in their browser, they will be joined
+
 //File is same as Initial Modal.tsx with some differences, like the form is removed
 export const InviteModal = () => {
   const { onOpen, isOpen, onClose, type, data } = useModal();
