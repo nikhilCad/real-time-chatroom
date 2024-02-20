@@ -14,6 +14,7 @@ export async function DELETE(
 
     const serverId = searchParams.get("serverId");
 
+    //null checks
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
@@ -32,6 +33,7 @@ export async function DELETE(
         members: {
           some: {
             profileId: profile.id,
+            //only mods and admin can delete channel
             role: {
               in: [MemberRole.ADMIN, MemberRole.MODERATOR],
             }
@@ -41,8 +43,10 @@ export async function DELETE(
       data: {
         channels: {
           delete: {
+            //delete this channel from props
             id: params.channelId,
             name: {
+              //except if its #general, backend validation
               not: "general",
             }
           }

@@ -1,6 +1,6 @@
 "use client";
 
-// import qs from "query-string";
+import qs from "query-string";
 import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -28,17 +28,20 @@ export const DeleteChannelModal = () => {
   const onClick = async () => {
     try {
       setIsLoading(true);
-    //   const url = qs.stringifyUrl({
-    //     url: `/api/channels/${channel?.id}`,
-    //     query: {
-    //       serverId: server?.id,
-    //     }
-    //   })
+      const url = qs.stringifyUrl({
+        url: `/api/channels/${channel?.id}`,
+        query: {
+          serverId: server?.id,
+        }
+      })
 
-    //   await axios.delete(url);
+      //DELETE api method in axios as defined in route.ts of
+      //   /app/api/channels/[channelId]/route.ts
+      await axios.delete(url);
 
       onClose();
       router.refresh();
+      //after deleting channel just go to the server url
       router.push(`/servers/${server?.id}`);
     } catch (error) {
       console.log(error);
