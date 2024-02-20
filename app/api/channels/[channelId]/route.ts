@@ -61,6 +61,8 @@ export async function DELETE(
   }
 }
 
+
+//for edit channel
 export async function PATCH(
   req: Request,
   { params }: { params: { channelId: string } }
@@ -84,6 +86,7 @@ export async function PATCH(
       return new NextResponse("Channel ID missing", { status: 400 });
     }
 
+    //cant edit general channel
     if (name === "general") {
       return new NextResponse("Name cannot be 'general'", { status: 400 });
     }
@@ -94,6 +97,7 @@ export async function PATCH(
         members: {
           some: {
             profileId: profile.id,
+            //only moderators and admin can edit channel
             role: {
               in: [MemberRole.ADMIN, MemberRole.MODERATOR],
             }
@@ -102,6 +106,7 @@ export async function PATCH(
       },
       data: {
         channels: {
+          //update data
           update: {
             where: {
               id: params.channelId,
@@ -110,6 +115,7 @@ export async function PATCH(
               },
             },
             data: {
+              //can update either name or type
               name,
               type,
             }

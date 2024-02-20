@@ -1,6 +1,6 @@
 "use client";
 
-// import qs from "query-string";
+import qs from "query-string";
 import axios from "axios";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,13 +26,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue
-// } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 import { useEffect } from "react";
 
 const formSchema = z.object({
@@ -62,8 +62,12 @@ export const EditChannelModal = () => {
     }
   });
 
+  //using useEffect as modal rendered before we
+  //receive channel data
   useEffect(() => {
+    //can only edit channel if it exists
    if (channel) {
+     //set name to channel.name
     form.setValue("name", channel.name);
     form.setValue("type", channel.type);
    }
@@ -73,13 +77,14 @@ export const EditChannelModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-    //   const url = qs.stringifyUrl({
-    //     url: `/api/channels/${channel?.id}`,
-    //     query: {
-    //       serverId: server?.id
-    //     }
-    //   });
-    //   await axios.patch(url, values);
+      const url = qs.stringifyUrl({
+        url: `/api/channels/${channel?.id}`,
+        query: {
+          serverId: server?.id
+        }
+      });
+      //logic for this in route.ts PATCH of /api/channels/${channel?.id}
+      await axios.patch(url, values);
 
       form.reset();
       router.refresh();
@@ -133,7 +138,7 @@ export const EditChannelModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Channel Type</FormLabel>
-                    {/* <Select
+                    <Select
                       disabled={isLoading}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -156,7 +161,7 @@ export const EditChannelModal = () => {
                           </SelectItem>
                         ))}
                       </SelectContent>
-                    </Select> */}
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
