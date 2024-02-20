@@ -48,6 +48,10 @@ main default page.tsx is inside (main) folder, but since its just organizational
 
 [[...folder-Name]] used for Clerk to work for routing in NextJS
 
+So in general -> app/(main)/(routes)/servers/[serverId]/channels/[channelId]/page.tsx
+
+this points to the layout of the page at url -> localhost:3000//servers/[serverId]/channels/[channelId]
+
 Here the 2nd class took priority
 
 "use client"
