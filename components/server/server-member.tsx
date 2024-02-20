@@ -35,6 +35,7 @@ export const ServerMember = ({
   const icon = roleIconMap[member.role];
 
   const onClick = () => {
+    //open messages of member in this server on click
     router.push(`/servers/${params?.serverId}/conversations/${member.id}`)
   }
 

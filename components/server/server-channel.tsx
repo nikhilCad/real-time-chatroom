@@ -44,11 +44,13 @@ export const ServerChannel = ({
 
   //redirect to channel on click
   const onClick = () => {
+    //go to channel url on clicking on it
     router.push(`/servers/${params?.serverId}/channels/${channel.id}`)
   }
 
   //prevent default action of mouseclick on the Edit or Delete button
   //instead just open the Modal
+  //redirect only if specifically click on channel(see onClick above)
   const onAction = (e: React.MouseEvent, action: ModalType) => {
     e.stopPropagation();
     onOpen(action, { channel, server });
