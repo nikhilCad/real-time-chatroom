@@ -95,6 +95,9 @@ DATABASE_URL (for Prisma)
 UPLOADTHING_SECRET (for uploadThing)
 UPLOADTHING_APP_ID
 
+NEXT_PUBLIC_SITE_URL = Put your deployed url here if you are deploying it,
+else it defaults to localhost, so no need to add
+
 ```
 
 For database, use prism init and provide the value to DATABASE_URL in .env file, this project uses Supabase
