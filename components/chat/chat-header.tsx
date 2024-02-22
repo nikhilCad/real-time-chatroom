@@ -21,6 +21,7 @@ export const ChatHeader = ({
 }: ChatHeaderProps) => {
   return (
     <div className="text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2">
+      {/* Hide sidebar on mobile and use toggle to show it */}
       <MobileToggle serverId={serverId} />
       {/* If channel show has if conversation show avatar, show name in both cases */}
       {/* name is coming from props which we pass ourselves in the component */}
