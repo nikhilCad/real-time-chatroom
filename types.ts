@@ -1,6 +1,6 @@
-// import { Server as NetServer, Socket } from "net";
-// import { NextApiResponse } from "next";
-// import { Server as SocketIOServer } from "socket.io";
+import { Server as NetServer, Socket } from "net";
+import { NextApiResponse } from "next";
+import { Server as SocketIOServer } from "socket.io";
 import { Server, Member, Profile } from "@prisma/client"
 import { Sidebar } from "lucide-react";
 
@@ -10,10 +10,11 @@ export type ServerWithMembersWithProfiles = Server & {
   members: (Member & { profile: Profile })[];
 };
 
-// export type NextApiResponseServerIo = NextApiResponse & {
-//   socket: Socket & {
-//     server: NetServer & {
-//       io: SocketIOServer;
-//     };
-//   };
-// };
+//custom response type to use inside io.ts
+export type NextApiResponseServerIo = NextApiResponse & {
+  socket: Socket & {
+    server: NetServer & {
+      io: SocketIOServer;
+    };
+  };
+};

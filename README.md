@@ -68,6 +68,8 @@ Axios -> Axios is a promise-based HTTP library that lets developers make request
 
 Zustand -> Global state management
 
+SocketIO -> Used for real-time messages, "Bidirectional and low-latency communication for every platform"
+
 **Commands after modifying prisma schema file, push data to db**
 ```
 npx prisma generate
