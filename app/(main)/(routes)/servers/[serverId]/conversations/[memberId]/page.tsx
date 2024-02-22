@@ -25,10 +25,12 @@ const MemberIdPage = async ({
 }: MemberIdPageProps) => {
   const profile = await currentProfile();
 
+  //null checks
   if (!profile) {
     return redirectToSignIn();
   }
 
+  //get user's profile
   const currentMember = await db.member.findFirst({
     where: {
       serverId: params.serverId,
@@ -43,18 +45,23 @@ const MemberIdPage = async ({
     return redirect("/");
   }
 
+  //use our library to get conversation
   const conversation = await getOrCreateConversation(currentMember.id, params.memberId);
 
+  //redirect to server both users have in common
   if (!conversation) {
     return redirect(`/servers/${params.serverId}`);
   }
 
   const { memberOne, memberTwo } = conversation;
 
+  //find the other member, as in db either could have initiated conversation
+  //to be placed first in db
   const otherMember = memberOne.profileId === profile.id ? memberTwo : memberOne;
 
   return ( 
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
+      {/* Name + Profile picture */}
       <ChatHeader
         imageUrl={otherMember.profile.imageUrl}
         name={otherMember.profile.name}
