@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-// import qs from "query-string";
+import qs from "query-string";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -24,6 +24,10 @@ import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
+
+//This modal opens when you click the plus icon in chat input box
+//heavily similar to the initial modal where we use uploadthing to add
+//profile picture of server
 
 const formSchema = z.object({
   fileUrl: z.string().min(1, {
@@ -54,15 +58,17 @@ export const MessageFileModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-    //   const url = qs.stringifyUrl({
-    //     url: apiUrl || "",
-    //     query,
-    //   });
+      const url = qs.stringifyUrl({
+        //if url not passed just use empty string
+        url: apiUrl || "",
+        query,
+      });
 
-    //   await axios.post(url, {
-    //     ...values,
-    //     content: values.fileUrl,
-    //   });
+      //upload file by going to this endpoint
+      await axios.post(url, {
+        ...values,
+        content: values.fileUrl,
+      });
 
       form.reset();
       router.refresh();

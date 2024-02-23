@@ -11,6 +11,9 @@ interface FileUploadProps {
   onChange: (url?: string) => void;
   value: string;
   //endpoint from core.ts 'ourFileRouter' for uploadthing
+  //messageFile is basically attachments in chat
+  //while serverImage is when user is creating a new server, for
+  //profile picture
   endpoint: "messageFile" | "serverImage"
 }
 
@@ -44,6 +47,7 @@ export const FileUpload = ({
     )
   }
 
+  //Don't try to show a thumbnail for the pdf for now 
   if (value && fileType === "pdf") {
     return (
       <div className="relative flex items-center p-2 mt-2 rounded-md bg-background/10">
