@@ -65,8 +65,11 @@ const ChannelIdPage = async ({
             name={channel.name}
             chatId={channel.id}
             type="channel"
+            //fetch messages from here
             apiUrl="/api/messages"
+            //trigger new messages using real-time socket io
             socketUrl="/api/socket/messages"
+            //query for the socket api
             socketQuery={{
               channelId: channel.id,
               serverId: channel.serverId,

@@ -5,7 +5,7 @@ import { Fragment, useRef, ElementRef } from "react";
 import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
 
-// import { useChatQuery } from "@/hooks/use-chat-query";
+import { useChatQuery } from "@/hooks/use-chat-query";
 // import { useChatSocket } from "@/hooks/use-chat-socket";
 // import { useChatScroll } from "@/hooks/use-chat-scroll";
 
@@ -29,6 +29,7 @@ interface ChatMessagesProps {
   apiUrl: string;
   socketUrl: string;
   socketQuery: Record<string, string>;
+  //can use in both channel and DMs
   paramKey: "channelId" | "conversationId";
   paramValue: string;
   type: "channel" | "conversation";
@@ -52,18 +53,18 @@ export const ChatMessages = ({
   const chatRef = useRef<ElementRef<"div">>(null);
   const bottomRef = useRef<ElementRef<"div">>(null);
 
-//   const {
-//     data,
-//     fetchNextPage,
-//     hasNextPage,
-//     isFetchingNextPage,
-//     status,
-//   } = useChatQuery({
-//     queryKey,
-//     apiUrl,
-//     paramKey,
-//     paramValue,
-//   });
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    status,
+  } = useChatQuery({
+    queryKey,
+    apiUrl,
+    paramKey,
+    paramValue,
+  });
 //   useChatSocket({ queryKey, addKey, updateKey });
 //   useChatScroll({
 //     chatRef,
@@ -73,7 +74,8 @@ export const ChatMessages = ({
 //     count: data?.pages?.[0]?.items?.length ?? 0,
 //   })
 
-  if (status === "loading") {
+//show different message depending on query status  
+if (status === "pending") {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
         <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" />
