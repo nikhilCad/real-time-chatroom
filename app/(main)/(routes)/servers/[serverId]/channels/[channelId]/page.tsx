@@ -77,6 +77,7 @@ const ChannelIdPage = async ({
           <ChatInput
             name={channel.name}
             type="channel"
+            //this is the index.ts file in api/socket/messages folder
             apiUrl="/api/socket/messages"
             query={{
               channelId: channel.id,
