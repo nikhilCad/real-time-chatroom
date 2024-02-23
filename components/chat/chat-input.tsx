@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useModal } from "@/hooks/use-modal-store";
-// import { EmojiPicker } from "@/components/emoji-picker";
+import { EmojiPicker } from "@/components/emoji-picker";
 
 
 //This is where you type your messages
@@ -101,9 +101,10 @@ export const ChatInput = ({
                     {...field}
                   />
                   <div className="absolute top-7 right-8">
-                    {/* <EmojiPicker
+                    <EmojiPicker
+                    //Use the emoji from the library and append it to the input field
                       onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}
-                    /> */}
+                    />
                   </div>
                 </div>
               </FormControl>
