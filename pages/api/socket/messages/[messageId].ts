@@ -108,7 +108,7 @@ export default async function handler(
           fileUrl: null,
           //Content deleted here
           content: "This message has been deleted.",
-          //use this flag to hide it in frontend
+          //use below flag to show above content message in grayed out font in channel
           //soft delete so that we cant handle if someone tries to access this message id in future
           deleted: true,
         },

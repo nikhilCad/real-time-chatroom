@@ -64,6 +64,7 @@ export const ChatItem = ({
   socketQuery
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  //Modal for deleting messages
   const { onOpen } = useModal();
   const params = useParams();
   const router = useRouter();
@@ -257,6 +258,7 @@ export const ChatItem = ({
           {/* Delete message button */}
           <ActionTooltip label="Delete">
             <Trash
+            //deleteMessage from use-model-store.ts
               onClick={() => onOpen("deleteMessage", { 
                 apiUrl: `${socketUrl}/${id}`,
                 query: socketQuery,

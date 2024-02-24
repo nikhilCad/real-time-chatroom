@@ -1,6 +1,6 @@
 "use client";
 
-// import qs from "query-string";
+import qs from "query-string";
 import axios from "axios";
 import { useState } from "react";
 
@@ -26,12 +26,14 @@ export const DeleteMessageModal = () => {
   const onClick = async () => {
     try {
       setIsLoading(true);
-    //   const url = qs.stringifyUrl({
-    //     url: apiUrl || "",
-    //     query,
-    //   });
+      const url = qs.stringifyUrl({
+        //apiUrl from useModal
+        //delete function in [messageId].ts
+        url: apiUrl || "",
+        query,
+      });
 
-    //   await axios.delete(url);
+      await axios.delete(url);
 
       onClose();
     } catch (error) {
