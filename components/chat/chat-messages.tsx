@@ -7,7 +7,7 @@ import { Loader2, ServerCrash } from "lucide-react";
 
 import { useChatQuery } from "@/hooks/use-chat-query";
 import { useChatSocket } from "@/hooks/use-chat-socket";
-// import { useChatScroll } from "@/hooks/use-chat-scroll";
+import { useChatScroll } from "@/hooks/use-chat-scroll";
 
 import { ChatWelcome } from "./chat-welcome";
 import { ChatItem } from "./chat-item";
@@ -54,6 +54,7 @@ export const ChatMessages = ({
   const addKey = `chat:${chatId}:messages`;
   const updateKey = `chat:${chatId}:messages:update` 
 
+  //these refs are to show more messages as we scroll up
   const chatRef = useRef<ElementRef<"div">>(null);
   const bottomRef = useRef<ElementRef<"div">>(null);
 
@@ -69,14 +70,17 @@ export const ChatMessages = ({
     paramKey,
     paramValue,
   });
+  //use socketIO for messages
   useChatSocket({ queryKey, addKey, updateKey });
-//   useChatScroll({
-//     chatRef,
-//     bottomRef,
-//     loadMore: fetchNextPage,
-//     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
-//     count: data?.pages?.[0]?.items?.length ?? 0,
-//   })
+  //fetches items as we scroll up
+  //scroll all way down when ou get a  new message 
+  useChatScroll({
+    chatRef,
+    bottomRef,
+    loadMore: fetchNextPage,
+    shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
+    count: data?.pages?.[0]?.items?.length ?? 0,
+  })
 
 //show different message depending on query status  
 if (status === "pending") {
@@ -105,6 +109,7 @@ if (status === "pending") {
     <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto">
       {!hasNextPage && <div className="flex-1" />}
       {!hasNextPage && (
+        //only show channel header if we have reached to very top
         <ChatWelcome
           type={type}
           name={name}
@@ -113,8 +118,10 @@ if (status === "pending") {
       {hasNextPage && (
         <div className="flex justify-center">
           {isFetchingNextPage ? (
+            //If fetching show a loader
             <Loader2 className="h-6 w-6 text-zinc-500 animate-spin my-4" />
           ) : (
+            //else button to load previous messages
             <button
               onClick={() => fetchNextPage()}
               className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 text-xs my-4 dark:hover:text-zinc-300 transition"
