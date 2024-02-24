@@ -72,6 +72,8 @@ SocketIO -> Used for real-time messages, "Bidirectional and low-latency communic
 
 LiveKit -> For video and audio channels
 
+App is deployed to Railways as we cant use Vercel because of web sockets
+
 **Commands after modifying prisma schema file, push data to db**
 ```
 npx prisma generate
@@ -105,9 +107,11 @@ LIVEKIT_API_KEY
 LIVEKIT_API_SECRET
 NEXT_PUBLIC_LIVEKIT_URL
 
+Get this after deploying to railways
+NEXT_PUBLIC_SITE_URL
+
 ```
 
 For database, use prism init and provide the value to DATABASE_URL in .env file, this project uses Supabase
 
 Main file -> Page.tsx
-9:32:30
