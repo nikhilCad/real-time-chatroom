@@ -70,6 +70,8 @@ Zustand -> Global state management
 
 SocketIO -> Used for real-time messages, "Bidirectional and low-latency communication for every platform"
 
+LiveKit -> For video and audio channels
+
 **Commands after modifying prisma schema file, push data to db**
 ```
 npx prisma generate
@@ -97,6 +99,11 @@ UPLOADTHING_APP_ID
 
 NEXT_PUBLIC_SITE_URL = Put your deployed url here if you are deploying it,
 else it defaults to localhost, so no need to add
+
+these are for livekit, used for video/audio channels
+LIVEKIT_API_KEY
+LIVEKIT_API_SECRET
+NEXT_PUBLIC_LIVEKIT_URL
 
 ```
 
