@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useRef, ElementRef } from "react";
-// import { format } from "date-fns";
+import { format } from "date-fns";
 import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
 
@@ -14,6 +14,7 @@ import { ChatItem } from "./chat-item";
 
 //Render the chat messages sent to the db
 
+//for date-fns, to be used in timestamp
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
 //Message from prisma client
@@ -133,7 +134,8 @@ if (status === "pending") {
                 content={message.content}
                 fileUrl={message.fileUrl}
                 deleted={message.deleted}
-                // timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                //date-fns used for timestamp formatting
+                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
                 isUpdated={message.updatedAt !== message.createdAt}
                 socketUrl={socketUrl}
                 socketQuery={socketQuery}

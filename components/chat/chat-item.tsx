@@ -39,6 +39,7 @@ interface ChatItemProps {
   socketQuery: Record<string, string>;
 };
 
+//Icons for hover state
 const roleIconMap = {
   "GUEST": null,
   "MODERATOR": <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
@@ -117,20 +118,26 @@ export const ChatItem = ({
     })
   }, [content]);
 
+  //get filetype from the uploadthing url
   const fileType = fileUrl?.split(".").pop();
 
   const isAdmin = currentMember.role === MemberRole.ADMIN;
   const isModerator = currentMember.role === MemberRole.MODERATOR;
+  //isOwner means this person made this particular message
   const isOwner = currentMember.id === member.id;
   const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
+  //only owner can edit message
   const canEditMessage = !deleted && isOwner && !fileUrl;
   const isPDF = fileType === "pdf" && fileUrl;
+  //as we only allow uploading either pdf or images
+  //this check should be good
   const isImage = !isPDF && fileUrl;
 
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
         <div onClick={onMemberClick} className="cursor-pointer hover:drop-shadow-md transition">
+            {/* Show avatar of each message, who sent the message */}
           <UserAvatar src={member.profile.imageUrl} />
         </div>
         <div className="flex flex-col w-full">
@@ -139,14 +146,17 @@ export const ChatItem = ({
               <p onClick={onMemberClick} className="font-semibold text-sm hover:underline cursor-pointer">
                 {member.profile.name}
               </p>
+              {/* If hovered, the role of user Member/Moderator/Admin etc will show */}
               <ActionTooltip label={member.role}>
                 {roleIconMap[member.role]}
               </ActionTooltip>
             </div>
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                {/* When this message was created */}
               {timestamp}
             </span>
           </div>
+          {/* If someone opens an Image in the chat */}
           {isImage && (
             <a 
               href={fileUrl}
