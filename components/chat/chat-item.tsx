@@ -46,6 +46,7 @@ const roleIconMap = {
   "ADMIN": <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />,
 }
 
+//message min length 1
 const formSchema = z.object({
   content: z.string().min(1),
 });
@@ -76,6 +77,7 @@ export const ChatItem = ({
   }
 
   useEffect(() => {
+      //escape key on message edit form will close message edit form
     const handleKeyDown = (event: any) => {
       if (event.key === "Escape" || event.keyCode === 27) {
         setIsEditing(false);
@@ -96,6 +98,7 @@ export const ChatItem = ({
 
   const isLoading = form.formState.isSubmitting;
 
+  //edit form
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const url = qs.stringifyUrl({
@@ -103,8 +106,10 @@ export const ChatItem = ({
         query: socketQuery,
       });
 
+      //send url using axios to update message after edit
       await axios.patch(url, values);
 
+      //reset form after message edit
       form.reset();
       setIsEditing(false);
     } catch (error) {
@@ -112,6 +117,7 @@ export const ChatItem = ({
     }
   }
 
+  //the edit message form, content is the message content
   useEffect(() => {
     form.reset({
       content: content,
@@ -126,7 +132,7 @@ export const ChatItem = ({
   //isOwner means this person made this particular message
   const isOwner = currentMember.id === member.id;
   const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
-  //only owner can edit message
+  //only owner can edit message, cant edit a pdf or image
   const canEditMessage = !deleted && isOwner && !fileUrl;
   const isPDF = fileType === "pdf" && fileUrl;
   //as we only allow uploading either pdf or images
@@ -162,6 +168,7 @@ export const ChatItem = ({
               href={fileUrl}
               target="_blank"
               rel="noopener noreferrer"
+              //aspect-square ie an empty square for the image to fit into
               className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48"
             >
               <Image
@@ -172,6 +179,7 @@ export const ChatItem = ({
               />
             </a>
           )}
+          {/* Same as above but for pdf, shows an Attachment with File icon saying PDF File */}
           {isPDF && (
             <div className="relative flex items-center p-2 mt-2 rounded-md bg-background/10">
               <FileIcon className="h-10 w-10 fill-indigo-200 stroke-indigo-400" />
@@ -190,7 +198,9 @@ export const ChatItem = ({
               "text-sm text-zinc-600 dark:text-zinc-300",
               deleted && "italic text-zinc-500 dark:text-zinc-400 text-xs mt-1"
             )}>
+                {/* Text message content */}
               {content}
+              {/* Edited tag */}
               {isUpdated && !deleted && (
                 <span className="text-[10px] mx-2 text-zinc-500 dark:text-zinc-400">
                   (edited)
@@ -199,6 +209,7 @@ export const ChatItem = ({
             </p>
           )}
           {!fileUrl && isEditing && (
+              //Edit message form
             <Form {...form}>
               <form 
                 className="flex items-center w-full gap-x-2 pt-2"
@@ -234,6 +245,7 @@ export const ChatItem = ({
       </div>
       {canDeleteMessage && (
         <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
+          {/* Edit message button */}
           {canEditMessage && (
             <ActionTooltip label="Edit">
               <Edit
@@ -242,6 +254,7 @@ export const ChatItem = ({
               />
             </ActionTooltip>
           )}
+          {/* Delete message button */}
           <ActionTooltip label="Delete">
             <Trash
               onClick={() => onOpen("deleteMessage", { 
