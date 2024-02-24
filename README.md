@@ -6,6 +6,10 @@ to run ->
 npm run dev
 ```
 
+![Main Page](images/main.png?raw=true "Main Page")
+![Add Server](images/addServer.png?raw=true "Add Server")
+![Direct Message](images/dm.png?raw=true "Direct Message")
+
 localhost at port 3000
 
 Next.JS -> Framework used with React
