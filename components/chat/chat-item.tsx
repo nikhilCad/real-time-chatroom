@@ -69,11 +69,14 @@ export const ChatItem = ({
   const params = useParams();
   const router = useRouter();
 
+  //if you click on a member name, if will be redirected to their DM
   const onMemberClick = () => {
     if (member.id === currentMember.id) {
+        //if you clicked your own, just return as you cant have a DM with yourself
       return;
     }
   
+    //go to dm url
     router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
   }
 
