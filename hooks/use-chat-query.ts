@@ -16,6 +16,10 @@ interface ChatQueryProps {
 //time taken, like "success", "error", "pending" etc
 //This can then be handled by frontend to show a spinner
 
+//We use infiniteQuery as the number of messages is very large ans
+//we obviously wont load all of them but a section of them
+//This library handles that sequential loading
+
 export const useChatQuery = ({
   queryKey,
   apiUrl,

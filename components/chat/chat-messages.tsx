@@ -9,13 +9,14 @@ import { useChatQuery } from "@/hooks/use-chat-query";
 // import { useChatSocket } from "@/hooks/use-chat-socket";
 // import { useChatScroll } from "@/hooks/use-chat-scroll";
 
-// import { ChatWelcome } from "./chat-welcome";
-// import { ChatItem } from "./chat-item";
+import { ChatWelcome } from "./chat-welcome";
+import { ChatItem } from "./chat-item";
 
 //Render the chat messages sent to the db
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
+//Message from prisma client
 type MessageWithMemberWithProfile = Message & {
   member: Member & {
     profile: Profile
@@ -99,7 +100,7 @@ if (status === "pending") {
 
   return (
     <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto">
-      {/* {!hasNextPage && <div className="flex-1" />}
+      {!hasNextPage && <div className="flex-1" />}
       {!hasNextPage && (
         <ChatWelcome
           type={type}
@@ -132,7 +133,7 @@ if (status === "pending") {
                 content={message.content}
                 fileUrl={message.fileUrl}
                 deleted={message.deleted}
-                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                // timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
                 isUpdated={message.updatedAt !== message.createdAt}
                 socketUrl={socketUrl}
                 socketQuery={socketQuery}
@@ -141,7 +142,7 @@ if (status === "pending") {
           </Fragment>
         ))}
       </div>
-      <div ref={bottomRef} /> */}
+      <div ref={bottomRef} />
     </div>
   )
 }
